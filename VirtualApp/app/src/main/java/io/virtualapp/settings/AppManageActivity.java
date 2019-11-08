@@ -71,7 +71,6 @@ public class AppManageActivity extends VActivity {
     }
 
     private void loadApp() {
-
         List<AppManageInfo> ret = new ArrayList<>();
         List<InstalledAppInfo> installedApps = VirtualCore.get().getInstalledApps(0);
         PackageManager packageManager = getPackageManager();

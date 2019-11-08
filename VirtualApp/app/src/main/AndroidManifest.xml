@@ -14,6 +14,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/vxp"
         android:theme="@style/LauncherTheme"
+        tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:icon,android:label">
 
         <meta-data
@@ -53,11 +54,6 @@
             android:taskAffinity="va.task.loading"
             android:theme="@style/TransparentTheme" />
 
-        <activity
-            android:name=".settings.AboutActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
         <activity android:name=".home.NewHomeActivity" />
 
         <activity
@@ -65,13 +61,6 @@
             android:label="@string/settings_title"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Material.Light" />
-
-
-        <activity
-            android:name=".settings.RecommendPluginActivity"
-            android:label="@string/settings_plugin_recommend"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light" />
 
         <activity
             android:name=".settings.AppManageActivity"
@@ -149,12 +138,6 @@
                 <category android:name="android.intent.category.LAUNCHER_APP" />
             </intent-filter>
         </activity-alias>
-
-
-        <service
-            android:name=".update.VAVersionService"
-            android:enabled="true"
-            android:exported="true" />
 
         <receiver
             android:name=".dev.CmdReceiver"

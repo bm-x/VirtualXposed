@@ -5,7 +5,6 @@ import android.app.ProgressDialog;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -23,9 +22,7 @@ import java.io.IOException;
 
 import io.virtualapp.R;
 import io.virtualapp.VCommends;
-import io.virtualapp.gms.FakeGms;
 import io.virtualapp.home.ListAppActivity;
-import io.virtualapp.utils.Misc;
 
 /**
  * Settings activity for Launcher. Currently implements the following setting: Allow rotation
@@ -38,21 +35,14 @@ public class SettingsActivity extends Activity {
     private static final String APP_MANAGE_KEY = "settings_app_manage";
     private static final String TASK_MANAGE_KEY = "settings_task_manage";
     private static final String DESKTOP_SETTINGS_KEY = "settings_desktop";
-    private static final String FAQ_SETTINGS_KEY = "settings_faq";
-    private static final String DONATE_KEY = "settings_donate";
-    private static final String ABOUT_KEY = "settings_about";
     private static final String REBOOT_KEY = "settings_reboot";
     private static final String HIDE_SETTINGS_KEY = "advance_settings_hide_settings";
     private static final String DISABLE_INSTALLER_KEY = "advance_settings_disable_installer";
     public static final String ENABLE_LAUNCHER = "advance_settings_enable_launcher";
-    private static final String INSTALL_GMS_KEY = "advance_settings_install_gms";
     public static final String DIRECTLY_BACK_KEY = "advance_settings_directly_back";
-    private static final String RECOMMEND_PLUGIN = "settings_plugin_recommend";
     private static final String DISABLE_RESIDENT_NOTIFICATION = "advance_settings_disable_resident_notification";
     private static final String ALLOW_FAKE_SIGNATURE = "advance_settings_allow_fake_signature";
     private static final String DISABLE_XPOSED = "advance_settings_disable_xposed";
-    private static final String FILE_MANAGE = "settings_file_manage";
-    private static final String PERMISSION_MANAGE = "settings_permission_manage";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +61,6 @@ public class SettingsActivity extends Activity {
      */
     public static class SettingsFragment extends PreferenceFragment {
 
-
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -82,17 +71,10 @@ public class SettingsActivity extends Activity {
 
             Preference addApp = findPreference(ADD_APP_KEY);
             Preference moduleManage = findPreference(MODULE_MANAGE_KEY);
-            Preference recommend = findPreference(RECOMMEND_PLUGIN);
             Preference appManage = findPreference(APP_MANAGE_KEY);
             Preference taskManage = findPreference(TASK_MANAGE_KEY);
             Preference desktop = findPreference(DESKTOP_SETTINGS_KEY);
-            Preference faq = findPreference(FAQ_SETTINGS_KEY);
-            Preference donate = findPreference(DONATE_KEY);
-            Preference about = findPreference(ABOUT_KEY);
             Preference reboot = findPreference(REBOOT_KEY);
-            Preference fileMange = findPreference(FILE_MANAGE);
-            Preference permissionManage = findPreference(PERMISSION_MANAGE);
-
 
             SwitchPreference disableInstaller = (SwitchPreference) findPreference(DISABLE_INSTALLER_KEY);
             SwitchPreference enableLauncher = (SwitchPreference) findPreference(ENABLE_LAUNCHER);
@@ -120,15 +102,9 @@ public class SettingsActivity extends Activity {
                 return false;
             });
 
-            recommend.setOnPreferenceClickListener(preference -> {
-                startActivity(new Intent(getActivity(), RecommendPluginActivity.class));
-                return false;
-            });
-
             boolean xposedEnabled = VirtualCore.get().isXposedEnabled();
             if (!xposedEnabled) {
                 getPreferenceScreen().removePreference(moduleManage);
-                getPreferenceScreen().removePreference(recommend);
             }
 
             appManage.setOnPreferenceClickListener(preference -> {
@@ -141,24 +117,8 @@ public class SettingsActivity extends Activity {
                 return false;
             });
 
-            faq.setOnPreferenceClickListener(preference -> {
-                Uri uri = Uri.parse("https://github.com/android-hacker/VAExposed/wiki/FAQ");
-                Intent t = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(t);
-                return false;
-            });
-
             desktop.setOnPreferenceClickListener(preference -> {
                 startActivity(new Intent(getActivity(), com.google.android.apps.nexuslauncher.SettingsActivity.class));
-                return false;
-            });
-
-            donate.setOnPreferenceClickListener(preference -> {
-                Misc.showDonate(getActivity());
-                return false;
-            });
-            about.setOnPreferenceClickListener(preference -> {
-                startActivity(new Intent(getActivity(), AboutActivity.class));
                 return false;
             });
 
@@ -209,29 +169,6 @@ public class SettingsActivity extends Activity {
                 } catch (Throwable ignored) {
                     return false;
                 }
-            });
-
-            Preference installGms = findPreference(INSTALL_GMS_KEY);
-            installGms.setOnPreferenceClickListener(preference -> {
-                boolean alreadyInstalled = FakeGms.isAlreadyInstalled(getActivity());
-                if (alreadyInstalled) {
-                    FakeGms.uninstallGms(getActivity());
-                } else {
-                    FakeGms.installGms(getActivity());
-                }
-                return true;
-            });
-
-            fileMange.setOnPreferenceClickListener(preference -> {
-                OnlinePlugin.openOrDownload(getActivity(), OnlinePlugin.FILE_MANAGE_PACKAGE,
-                        OnlinePlugin.FILE_MANAGE_URL, getString(R.string.install_file_manager_tips));
-                return false;
-            });
-
-            permissionManage.setOnPreferenceClickListener(preference -> {
-                OnlinePlugin.openOrDownload(getActivity(), OnlinePlugin.PERMISSION_MANAGE_PACKAGE,
-                        OnlinePlugin.PERMISSION_MANAGE_URL, getString(R.string.install_permission_manager_tips));
-                return false;
             });
 
             disableXposed.setOnPreferenceChangeListener((preference, newValue) -> {

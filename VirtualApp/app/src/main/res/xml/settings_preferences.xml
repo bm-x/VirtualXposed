@@ -13,24 +13,9 @@
         android:summary="@string/settings_module_manage_summary"
         android:title="@string/settings_module_manage" />
 
-    <Preference
-        android:key="settings_plugin_recommend"
-        android:persistent="false"
-        android:title="@string/settings_plugin_recommend" />
-
-    <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    <PreferenceScreen
         android:key="settings_advance"
         android:title="@string/settings_advance">
-
-        <Preference
-            android:key="advance_settings_install_gms"
-            android:persistent="false"
-            android:title="@string/advance_settings_install_gms"/>
-
-        <Preference
-            android:key="settings_file_manage"
-            android:persistent="false"
-            android:title="@string/settings_file_manage_text" />
 
         <SwitchPreference
             android:defaultValue="false"
@@ -88,11 +73,6 @@
     </PreferenceScreen>
 
     <Preference
-        android:key="settings_permission_manage"
-        android:persistent="false"
-        android:title="@string/settings_permission_manage_text" />
-
-    <Preference
         android:key="settings_app_manage"
         android:persistent="false"
         android:title="@string/settings_app_manage_text" />
@@ -101,21 +81,6 @@
         android:key="settings_task_manage"
         android:persistent="false"
         android:title="@string/settings_task_manage_text" />
-
-    <Preference
-        android:key="settings_donate"
-        android:persistent="false"
-        android:title="@string/about_donate_title" />
-
-    <Preference
-        android:key="settings_faq"
-        android:persistent="false"
-        android:title="@string/about_faq_title" />
-
-    <Preference
-        android:key="settings_about"
-        android:persistent="false"
-        android:title="@string/settings_about_text" />
 
     <Preference
         android:key="settings_reboot"

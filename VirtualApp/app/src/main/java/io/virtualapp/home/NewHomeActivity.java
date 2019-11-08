@@ -34,19 +34,18 @@ import com.lody.virtual.helper.utils.DeviceUtil;
 import com.lody.virtual.helper.utils.FileUtils;
 import com.lody.virtual.helper.utils.MD5Utils;
 import com.lody.virtual.helper.utils.VLog;
+import com.lody.virtual.remote.InstalledAppInfo;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Method;
+import java.util.List;
 
 import io.virtualapp.R;
 import io.virtualapp.abs.ui.VUiKit;
 import io.virtualapp.settings.SettingsActivity;
-import io.virtualapp.update.VAVersionService;
-import io.virtualapp.utils.Misc;
-import jonathanfinerty.once.Once;
 
 import static io.virtualapp.XApp.XPOSED_INSTALLER_PACKAGE;
 
@@ -78,7 +77,6 @@ public class NewHomeActivity extends NexusLauncherActivity {
         showMenuKey();
         mUiHandler = new Handler(getMainLooper());
         alertForMeizu();
-        alertForDonate();
         mDirectlyBack = sharedPreferences.getBoolean(SettingsActivity.DIRECTLY_BACK_KEY, false);
     }
 
@@ -160,9 +158,6 @@ public class NewHomeActivity extends NexusLauncherActivity {
             checkXposedInstaller = false;
             installXposed();
         }
-        // check for update
-        new Handler().postDelayed(() ->
-                VAVersionService.checkUpdate(getApplicationContext(), false), 1000);
 
         // check for wallpaper
         setWallpaper();
@@ -231,26 +226,6 @@ public class NewHomeActivity extends NexusLauncherActivity {
         }
         if (mDirectlyBack) {
             finish();
-        }
-    }
-
-    private void alertForDonate() {
-        final String TAG = "show_donate";
-        if (Once.beenDone(Once.THIS_APP_VERSION, TAG)) {
-            alertForDoze();
-            return;
-        }
-        AlertDialog alertDialog = new AlertDialog.Builder(getContext())
-                .setTitle(R.string.about_donate)
-                .setMessage(R.string.donate_dialog_content)
-                .setPositiveButton(android.R.string.yes, (dialog, which) -> {
-                    Misc.showDonate(this);
-                    Once.markDone(TAG);
-                })
-                .create();
-        try {
-            alertDialog.show();
-        } catch (Throwable ignored) {
         }
     }
 
