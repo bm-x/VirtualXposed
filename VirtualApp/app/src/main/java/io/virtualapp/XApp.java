@@ -47,5 +47,4 @@ public class XApp extends Application {
         VirtualCore virtualCore = VirtualCore.get();
         virtualCore.initialize(new MyVirtualInitializer(this, virtualCore));
     }
-
 }

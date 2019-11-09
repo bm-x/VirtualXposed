@@ -12,7 +12,6 @@ import android.preference.PreferenceScreen;
 import android.preference.SwitchPreference;
 import android.widget.Toast;
 
-import com.android.launcher3.LauncherFiles;
 import com.lody.virtual.client.core.VirtualCore;
 import com.lody.virtual.client.env.Constants;
 import com.lody.virtual.client.ipc.VActivityManager;
@@ -64,7 +63,7 @@ public class SettingsActivity extends Activity {
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            getPreferenceManager().setSharedPreferencesName(LauncherFiles.SHARED_PREFERENCES_KEY);
+            getPreferenceManager().setSharedPreferencesName("com.android.launcher3.prefs");
             addPreferencesFromResource(R.xml.settings_preferences);
 
             // Setup allow rotation preference
@@ -118,7 +117,7 @@ public class SettingsActivity extends Activity {
             });
 
             desktop.setOnPreferenceClickListener(preference -> {
-                startActivity(new Intent(getActivity(), com.google.android.apps.nexuslauncher.SettingsActivity.class));
+                // startActivity(new Intent(getActivity(), com.google.android.apps.nexuslauncher.SettingsActivity.class));
                 return false;
             });
 

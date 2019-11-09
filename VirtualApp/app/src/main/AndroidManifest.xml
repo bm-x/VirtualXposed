@@ -13,7 +13,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/vxp"
-        android:theme="@style/LauncherTheme"
+        android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:icon,android:label">
 
@@ -40,6 +40,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".home.MainActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".home.ListAppActivity"

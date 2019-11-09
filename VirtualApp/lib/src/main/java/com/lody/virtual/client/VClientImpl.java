@@ -61,7 +61,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import me.weishu.exposed.ExposedBridge;
 import mirror.android.app.ActivityThread;
 import mirror.android.app.ActivityThreadNMR1;
 import mirror.android.app.ContextImpl;
@@ -329,20 +328,20 @@ public final class VClientImpl extends IVClient.Stub {
             applicationInfo.splitNames = new String[1];
         }
 
-
-        boolean enableXposed = VirtualCore.get().isXposedEnabled() && !BuildCompat.isQ();
-        if (enableXposed) {
-            VLog.i(TAG, "Xposed is enabled.");
-            ClassLoader originClassLoader = context.getClassLoader();
-            ExposedBridge.initOnce(context, data.appInfo, originClassLoader);
-            List<InstalledAppInfo> modules = VirtualCore.get().getInstalledApps(0);
-            for (InstalledAppInfo module : modules) {
-                ExposedBridge.loadModule(module.apkPath, module.getOdexFile().getParent(), module.libPath,
-                        data.appInfo, originClassLoader);
-            }
-        } else {
-            VLog.w(TAG, "Xposed is disable..");
-        }
+//        TODO 代码注入
+//        boolean enableXposed = VirtualCore.get().isXposedEnabled() && !BuildCompat.isQ();
+//        if (enableXposed) {
+//            VLog.i(TAG, "Xposed is enabled.");
+//            ClassLoader originClassLoader = context.getClassLoader();
+//            ExposedBridge.initOnce(context, data.appInfo, originClassLoader);
+//            List<InstalledAppInfo> modules = VirtualCore.get().getInstalledApps(0);
+//            for (InstalledAppInfo module : modules) {
+//                ExposedBridge.loadModule(module.apkPath, module.getOdexFile().getParent(), module.libPath,
+//                        data.appInfo, originClassLoader);
+//            }
+//        } else {
+//            VLog.w(TAG, "Xposed is disable..");
+//        }
 
         mInitialApplication = LoadedApk.makeApplication.call(data.info, false, null);
 

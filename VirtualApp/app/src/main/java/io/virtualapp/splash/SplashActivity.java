@@ -1,5 +1,6 @@
 package io.virtualapp.splash;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.WindowManager;
 
@@ -9,7 +10,7 @@ import io.virtualapp.R;
 import io.virtualapp.VCommends;
 import io.virtualapp.abs.ui.VActivity;
 import io.virtualapp.abs.ui.VUiKit;
-import io.virtualapp.home.NewHomeActivity;
+import io.virtualapp.home.MainActivity;
 import jonathanfinerty.once.Once;
 
 public class SplashActivity extends VActivity {
@@ -22,6 +23,7 @@ public class SplashActivity extends VActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_splash);
         VUiKit.defer().when(() -> {
             long time = System.currentTimeMillis();
@@ -32,7 +34,8 @@ public class SplashActivity extends VActivity {
                 VUiKit.sleep(delta);
             }
         }).done((res) -> {
-            NewHomeActivity.goHome(this);
+            // NewHomeActivity.goHome(this);
+            startActivity(new Intent(this, MainActivity.class));
             finish();
         });
     }
