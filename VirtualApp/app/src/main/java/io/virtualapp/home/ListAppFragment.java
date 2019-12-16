@@ -218,6 +218,7 @@ public class ListAppFragment extends VFragment<ListAppContract.ListAppPresenter>
                 Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
             }
         });
+
         new ListAppPresenterImpl(getActivity(), this, getSelectFrom()).start();
     }
 

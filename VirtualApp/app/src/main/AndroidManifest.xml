@@ -58,8 +58,6 @@
             android:taskAffinity="va.task.loading"
             android:theme="@style/TransparentTheme" />
 
-        <activity android:name=".home.NewHomeActivity" />
-
         <activity
             android:name=".settings.SettingsActivity"
             android:label="@string/settings_title"
@@ -124,22 +122,6 @@
 
                 <data android:scheme="content" />
                 <data android:mimeType="application/vnd.android.package-archive" />
-            </intent-filter>
-        </activity-alias>
-
-        <activity-alias
-            android:name="vxp.launcher"
-            android:enabled="false"
-            android:exported="true"
-            android:targetActivity=".home.NewHomeActivity">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.HOME" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.MONKEY" />
-                <category android:name="android.intent.category.LAUNCHER_APP" />
             </intent-filter>
         </activity-alias>
 
